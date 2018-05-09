@@ -6,9 +6,12 @@ public class AlmacenBean implements Serializable {
 	private static final long serialVersionUID = 3481274912989833917L;
 	
 	private Long idAlmacen;
-	private Long idAlmacenEditar;
 	private String nombreAlmacen;
 	private String telefono;	
+	private Long idAlmacenEditar;
+	private String nombreAlmacenEditar;
+	private String telefonoEditar;	
+	private Integer esActivo;
 	
 	public Long getIdAlmacen() {
 		return idAlmacen;
@@ -34,4 +37,23 @@ public class AlmacenBean implements Serializable {
 	public void setIdAlmacenEditar(Long idAlmacenEditar) {
 		this.idAlmacenEditar = idAlmacenEditar;
 	}
+	public String getNombreAlmacenEditar() {
+		return nombreAlmacenEditar;
+	}
+	public void setNombreAlmacenEditar(String nombreAlmacenEditar) {
+		this.nombreAlmacenEditar = nombreAlmacenEditar;
+	}
+	public String getTelefonoEditar() {
+		return telefonoEditar;
+	}
+	public void setTelefonoEditar(String telefonoEditar) {
+		this.telefonoEditar = telefonoEditar;
+	}
+	public Integer getEsActivo() {
+		return esActivo;
+	}
+	public void setEsActivo(Integer esActivo) {
+		this.esActivo = esActivo;
+	}
+	
 }

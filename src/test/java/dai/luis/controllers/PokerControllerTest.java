@@ -2,6 +2,8 @@ package dai.luis.controllers;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+//import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import java.util.ArrayList;
@@ -55,7 +57,7 @@ public class PokerControllerTest extends AbstractControllerTest{
 		
 		verify(pokerService).sacaDiezCartasAzar();
 		verify(pokerService).getCartasFinalesJugador(someListMock(), false);
-		verify(pokerService).comprobaciones(naipes);
+		verify(pokerService, times(2)).comprobaciones(naipes);
 		
 	/*Es una prueba 
 	 * Recuerda las interacciones y comprueba que son iguales*/

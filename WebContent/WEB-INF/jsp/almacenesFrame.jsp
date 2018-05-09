@@ -10,7 +10,7 @@
  </head> 
  
  
- <body onload="loadi();">
+ <body>
  
  	<jsp:include page="cabecera.jsp"/>
 	<p><span class="errorblock"><c:out value="${mensajecreado}"/></span></p>
@@ -61,8 +61,10 @@
 		    		<form:form action="editaAlmacen.html" method="POST" commandName="almacenBeanFiltro">  
 		    			<form:hidden path="idAlmacen"/>
 						<form:hidden path="nombreAlmacen"/>
-						<form:hidden path="telefono"/>		
+						<form:hidden path="telefono"/>								
 						<form:hidden path="idAlmacenEditar" value="${list.idAlmacen}"/>
+						<form:hidden path="nombreAlmacenEditar" value="${list.nombreAlmacen}"/>
+						<form:hidden path="telefonoEditar" value="${list.telefono}"/>		
 						<button type="submit"><img src="img/modi2.png" alt="Editar" /></button>
 		    		</form:form>
 	    		</td>

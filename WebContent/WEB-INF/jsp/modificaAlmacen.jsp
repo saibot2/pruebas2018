@@ -24,10 +24,12 @@
  	</div>
  	<p><h1>Modifica Almacen</h1></p>
  	
- 	
-	<form:form action="modificaAlmacen.html" method="POST" commandName="command">
-		<form:hidden path="idAlmacen"/>
-		<form:hidden  path="esActivo"/>
+	<form:form action="modificaAlmacen.html" method="POST" commandName="almacenBeanFiltro">
+		<form:hidden path="idAlmacen" />
+		<form:hidden path="nombreAlmacen" />
+		<form:hidden path="telefono" />		
+		<form:hidden path="idAlmacenEditar"/>
+		<form:hidden  path="esActivo"/>		
 		<table> 	 
 			<tr>
 				<th>ID:</th>
@@ -35,12 +37,12 @@
 			</tr>
 			
 			<tr>
-				<th><form:label path="nombreAlmacen">Nombre:</form:label></th>
-				<td><form:input path="nombreAlmacen" autofocus="autofocus"/></td>
+				<th><form:label path="nombreAlmacenEditar">Nombre:</form:label></th>
+				<td><form:input path="nombreAlmacenEditar" autofocus="autofocus"/></td>
 			</tr>
 			<tr>
-				<th><form:label path="telefono">Teléfono:</form:label></th>
-				<td><form:input path="telefono"/></td>
+				<th><form:label path="telefonoEditar">Teléfono:</form:label></th>
+				<td><form:input path="telefonoEditar"/></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right"><input type="submit" value="Actualizar"/></td>

@@ -29,18 +29,21 @@ public class ModificaController {
 		String mensaje = req.getParameter("mensajecreado");
 		Almacen almacen = almacenService.buscarAlmacenById(almacenBean.getIdAlmacenEditar());
 		model.addAttribute("mensajecreado", mensaje);
-		/*Tenemos dos objetos modelo que se van a pasar a una JSP:'almacenBeanFiltro' y 'command'
-		 * uno es para rellenar el form: 'consultaAlmacen' y el otro para el form: 'modificaAlmacen'*/
 		model.addAttribute("command", almacen);
+		almacenBean.setEsActivo(almacen.getEsActivo());		
 		return new ModelAndView("modificaAlmacen","almacenBeanFiltro",almacenBean);
-	}
+	}	
 	
 	@RequestMapping(value="modificaAlmacen", method = RequestMethod.POST)
-	public String actualizaAlmacen(Almacen almacen, ModelMap model) {	
+	public ModelAndView actualizaAlmacen(AlmacenBean almacenBean, ModelMap model,HttpServletRequest req) {	
+		Almacen almacen = almacenService.buscarAlmacenById(almacenBean.getIdAlmacenEditar());
+		almacen.setNombreAlmacen(almacenBean.getNombreAlmacenEditar());
+		almacen.setTelefono(almacenBean.getTelefonoEditar());
 		String mensaje = almacenService.updateAlmacenSession(almacen);
-		model.addAttribute("mensajecreado",(mensaje.equalsIgnoreCase("ko")?"ERROR al modificar Almacen.":"Almacen modificado satisfactoriamente.") );		
-		return "redirect:/modificaAlmacen.html?id="+almacen.getIdAlmacen();	
-	}
+		model.addAttribute("mensajecreado",(mensaje.equalsIgnoreCase("ko")?"ERROR al modificar Almacen.":"Almacen modificado satisfactoriamente.") );
+		model.addAttribute("command", almacen);
+		return new ModelAndView("modificaAlmacen","almacenBeanFiltro",almacenBean);
+	}	
 	
 	@RequestMapping(value="modificaProducto/{idAlmacen}/{idProducto}", method = RequestMethod.GET)
 	public ModelAndView modificaProducto(
@@ -58,5 +61,4 @@ public class ModificaController {
 		model.addAttribute("mensajecreado",(mensaje.equalsIgnoreCase("ko")?"ERROR al modificar Producto.":"Producto modificado satisfactoriamente."));
 		return "redirect:/modificaAlmacen.html?id="+producto.getAlmacen().getIdAlmacen();  
 	}
-	
 }
