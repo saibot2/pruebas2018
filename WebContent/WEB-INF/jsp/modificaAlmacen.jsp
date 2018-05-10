@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/bootstrap/css/bootstrap.min.css">     
  </head> 
  
- <body> 
+ <body>                                        
 
+</p>
 	<form:form action="consultaAlmacen.html" method="POST" commandName="almacenBeanFiltro">			
 		<form:hidden path="idAlmacen" />
 		<form:hidden path="nombreAlmacen" />
@@ -67,7 +68,20 @@
 		 				<c:out value="${list.pvp}"/>		
 		 			</td>
 		 			<td>
-		 				<a class="" href="modificaProducto/${command.idAlmacen}/${list.idProducto}.html">
+		 				<c:if test="${empty almacenBeanFiltro.nombreAlmacen}">
+						     <c:set var="nombre" scope="request" value="0"/>
+						</c:if>
+						<c:if test="${not empty almacenBeanFiltro.nombreAlmacen}">
+						     <c:set var="nombre" scope="request" value="${almacenBeanFiltro.nombreAlmacen}"/>
+						</c:if>
+						<c:if test="${empty almacenBeanFiltro.telefono}">
+						     <c:set var="telefono" scope="request" value="0"/>
+						</c:if>
+						<c:if test="${not empty almacenBeanFiltro.telefono}">
+						     <c:set var="telefono" scope="request" value="${almacenBeanFiltro.telefono}"/>
+						</c:if>
+		 			
+		 				<a class="" href="modificaProducto/${command.idAlmacen}/${list.idProducto}/<c:out value = "${almacenBeanFiltro.idAlmacen}" default="0"/>/<c:out value = "${nombre}"/>/<c:out value = "${telefono}"/>.html">
 							<img src="img/modi2.png" border="1" height="23" >
 						</a>
 		 			</td>

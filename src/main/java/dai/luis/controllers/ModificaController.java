@@ -45,13 +45,20 @@ public class ModificaController {
 		return new ModelAndView("modificaAlmacen","almacenBeanFiltro",almacenBean);
 	}	
 	
-	@RequestMapping(value="modificaProducto/{idAlmacen}/{idProducto}", method = RequestMethod.GET)
+	@RequestMapping(value="modificaProducto/{idAlmacenEditar}/{idProductoEditar}/{idAlmacen}/{nombreAlmacen}/{telefono}", method = RequestMethod.GET)
 	public ModelAndView modificaProducto(
+			@PathVariable Long idAlmacenEditar,
+			@PathVariable Long idProductoEditar, 
 			@PathVariable Long idAlmacen,
-			@PathVariable Long idProducto, 
-			ModelMap model) {			
+			@PathVariable String nombreAlmacen,
+			@PathVariable String telefono,
+			ModelMap model) {	
+		//{idAlmacen}/{nombreAlmacen}/{telefono} son para poder generar la consulta inicial al volver.
 		model.addAttribute("crearUpdateMsg", "Modifica Producto");
-		Producto producto = productoService.buscarProducto(idProducto, idAlmacen);
+		Producto producto = productoService.buscarProducto(idProductoEditar, idAlmacenEditar);
+		AlmacenBean almacenBean = setAlmacenBean(idAlmacen, nombreAlmacen, telefono); 
+		model.addAttribute("almacenBeanFiltro", almacenBean);
+		
 		return new ModelAndView("modificaProducto","command",producto);	
 	}
 	
@@ -60,5 +67,13 @@ public class ModificaController {
 		String mensaje = productoService.updateProducto(producto);
 		model.addAttribute("mensajecreado",(mensaje.equalsIgnoreCase("ko")?"ERROR al modificar Producto.":"Producto modificado satisfactoriamente."));
 		return "redirect:/modificaAlmacen.html?id="+producto.getAlmacen().getIdAlmacen();  
+	}
+	
+	private AlmacenBean setAlmacenBean(Long idAlmacen, String nombreAlmacen,String telefono){
+		AlmacenBean almacenBean = new AlmacenBean();
+		almacenBean.setIdAlmacen( (idAlmacen==0) ? null :idAlmacen );
+		almacenBean.setNombreAlmacen( (nombreAlmacen.equalsIgnoreCase("0")) ? null : nombreAlmacen );
+		almacenBean.setTelefono( (telefono.equalsIgnoreCase("0")) ? null : telefono );
+		return almacenBean;
 	}
 }
