@@ -14,6 +14,7 @@
  
  	<jsp:include page="cabecera.jsp"/>
 	<p><span class="errorblock"><c:out value="${mensajecreado}"/></span></p>
+	
  	<p><h1>CONSULTA ALMACENES</h1></p>
 	
 	<form:form action="consultaAlmacen.html" method="POST" commandName="almacenBeanFiltro">  

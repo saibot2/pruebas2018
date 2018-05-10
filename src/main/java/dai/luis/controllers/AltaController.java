@@ -57,10 +57,9 @@ public class AltaController {
 	 
 	 @RequestMapping(value="altaProducto", method = RequestMethod.POST)
 	 public String crearProducto(Producto producto,ModelMap model) { 
-	    model.addAttribute("mensajecreado","Producto creado satisfactoriamente.");
 	    Long id = productoService.crearProducto (producto);
 		model.addAttribute("mensajecreado",(id==null?"ERROR al crear Producto.":"Producto creado satisfactoriamente.") );
-		return "redirect:/modificaAlmacen.html?id="+producto.getAlmacen().getIdAlmacen();
+		return "redirect:/consultaAlmacen.html";
 	 } 
 	 
 }

@@ -30,7 +30,6 @@ public class ModificaController {
 		Almacen almacen = almacenService.buscarAlmacenById(almacenBean.getIdAlmacenEditar());
 		model.addAttribute("mensajecreado", mensaje);
 		model.addAttribute("command", almacen);
-		almacenBean.setEsActivo(almacen.getEsActivo());		
 		return new ModelAndView("modificaAlmacen","almacenBeanFiltro",almacenBean);
 	}	
 	
@@ -58,15 +57,14 @@ public class ModificaController {
 		Producto producto = productoService.buscarProducto(idProductoEditar, idAlmacenEditar);
 		AlmacenBean almacenBean = setAlmacenBean(idAlmacen, nombreAlmacen, telefono); 
 		model.addAttribute("almacenBeanFiltro", almacenBean);
-		
 		return new ModelAndView("modificaProducto","command",producto);	
 	}
 	
 	@RequestMapping(value="modificaProducto", method = RequestMethod.POST)
-	public String actualizaProducto(Producto producto, ModelMap model, HttpServletRequest req) {			
-		String mensaje = productoService.updateProducto(producto);
+	public String actualizaProducto(Producto producto, ModelMap model) {			
+		String mensaje = productoService.updateProducto(producto);		
 		model.addAttribute("mensajecreado",(mensaje.equalsIgnoreCase("ko")?"ERROR al modificar Producto.":"Producto modificado satisfactoriamente."));
-		return "redirect:/modificaAlmacen.html?id="+producto.getAlmacen().getIdAlmacen();  
+		return "redirect:/consultaAlmacen.html";	
 	}
 	
 	private AlmacenBean setAlmacenBean(Long idAlmacen, String nombreAlmacen,String telefono){

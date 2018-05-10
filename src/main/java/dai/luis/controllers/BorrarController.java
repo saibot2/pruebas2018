@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dai.luis.beans.AlmacenBean;
+import dai.luis.models.Almacen;
 import dai.luis.service.AlmacenService;
 import dai.luis.service.ProductoService;
 
@@ -23,10 +25,23 @@ public class BorrarController {
 	public String borrarProducto(
 			@RequestParam(value="id",required=false) Long id,
 			@RequestParam(value="idAlmacen",required=false) Long idAlmacen,
+			@RequestParam (value="idAlmacenBack",required=false) Long idAlmacenBack, 
+			@RequestParam (value="nombreAlmacenBack",required=false) String nombreAlmacenBack,  
+			@RequestParam (value="telefonoBack",required=false) String telefonoBack,
 			ModelMap model) {			
-		model.addAttribute("crearUpdateMsg", "Modifica Producto");
 		productoService.borrarProducto(id);
-		return "redirect:/modificaAlmacen.html?id="+idAlmacen;
+		AlmacenBean almacenBean = new AlmacenBean();
+		almacenBean.setIdAlmacen(idAlmacenBack);
+		almacenBean.setNombreAlmacen(nombreAlmacenBack);
+		almacenBean.setTelefono(telefonoBack);
+		Almacen almacen = almacenService.buscarAlmacenById(idAlmacen);
+		almacenBean.setIdAlmacenEditar(idAlmacen);
+		almacenBean.setNombreAlmacenEditar(almacen.getNombreAlmacen());
+		almacenBean.setTelefonoEditar(almacen.getTelefono());
+		model.addAttribute("command", almacen);
+		model.addAttribute("almacenBeanFiltro", almacenBean);
+		model.addAttribute("mensajecreado","Producto Borrado satisfactoriamente.");
+		return "modificaAlmacen";
 	}
 	
 	

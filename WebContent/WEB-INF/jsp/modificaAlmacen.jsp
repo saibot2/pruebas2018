@@ -11,7 +11,6 @@
  
  <body>                                        
 
-</p>
 	<form:form action="consultaAlmacen.html" method="POST" commandName="almacenBeanFiltro">			
 		<form:hidden path="idAlmacen" />
 		<form:hidden path="nombreAlmacen" />
@@ -86,7 +85,7 @@
 						</a>
 		 			</td>
 		 			<td>
-		 				<a href="borrarProducto.html?id=${list.idProducto}&idAlmacen=${command.idAlmacen}"><img src="img/eliminar.png" border="0" > </a>
+		 				<a href="borrarProducto.html?id=${list.idProducto}&idAlmacen=${command.idAlmacen}&idAlmacenBack=${almacenBeanFiltro.idAlmacen}&nombreAlmacenBack=${almacenBeanFiltro.nombreAlmacen}&telefonoBack=${almacenBeanFiltro.telefono}"><img src="img/eliminar.png" border="0" > </a>
 		 			</td>
 		 		</tr>
 			</c:forEach>

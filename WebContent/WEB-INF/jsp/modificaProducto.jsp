@@ -11,7 +11,8 @@
  
  <body> 
  	<a href="javascript:history.back(1)">Volver</a>
- 	<p><h1><c:out value="${requestScope.crearUpdateMsg}"/></h1></p> 	 	
+ 	
+ 	<p><h1><c:out value="${requestScope.crearUpdateMsg}"/></h1></p> 	 		
  	
  	<c:choose>
 	   <c:when test="${requestScope.crearUpdateMsg == 'Crear Producto'}">
